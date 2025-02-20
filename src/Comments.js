@@ -6,7 +6,14 @@ import SingleComment from "./SingleComment";
 
 function Comments(props) {
   const [textComment, setTextComment] = useState("");
-  // console.log("comments>>>", props);
+
+  const comments = useSelector((state) => {
+    console.log("redux state >", state);
+
+    const { commentsReducer } = state;
+    return commentsReducer.comments;
+  });
+
   const dispatch = useDispatch();
   const handleInput = (e) => {
     setTextComment(e.target.value);
@@ -27,8 +34,10 @@ function Comments(props) {
         <input type="text" value={textComment} onChange={handleInput} />
         <input type="submit" hidden />
       </form>
-
-      <SingleComment />
+      {!!comments.length &&
+        comments.map((res) => {
+          return <SingleComment key={res.id} data={res} />;
+        })}
     </div>
   );
 }

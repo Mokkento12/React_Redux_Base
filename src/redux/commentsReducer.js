@@ -7,15 +7,13 @@ const initialState = {
 export const commentsReducer = (state = initialState, action) => {
   console.log("comments Reducer>", action);
 
-  return state;
-
-  // switch (action.type) {
-  //   case INPUT_TEXT:
-  //     return {
-  //       ...state,
-  //       text: action.text,
-  //     };
-  //   default:
-  //     return state;
-  // }
+  switch (action.type) {
+    case COMMENT_CREATE:
+      return {
+        ...state,
+        comments: [...state.comments, action.data],
+      };
+    default:
+      return state;
+  }
 };
