@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import uniqid from "uniqid";
+import { commentCreate } from "./redux/actions";
 import SingleComment from "./SingleComment";
 
 function Comments(props) {
   const [textComment, setTextComment] = useState("");
   // console.log("comments>>>", props);
-
+  const dispatch = useDispatch();
   const handleInput = (e) => {
-    console.log("input >>>", e.target.value);
     setTextComment(e.target.value);
   };
 
@@ -14,6 +16,9 @@ function Comments(props) {
     e.preventDefault();
 
     console.log("submit textComment>", textComment);
+
+    const id = uniqid();
+    dispatch(commentCreate(textComment, id));
   };
 
   return (
