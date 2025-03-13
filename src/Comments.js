@@ -8,8 +8,6 @@ function Comments(props) {
   const [textComment, setTextComment] = useState("");
 
   const comments = useSelector((state) => {
-    console.log("redux state >", state);
-
     const { commentsReducer } = state;
     return commentsReducer.comments;
   });
@@ -21,9 +19,6 @@ function Comments(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("submit textComment>", textComment);
-
     const id = uniqid();
     dispatch(commentCreate(textComment, id));
   };
